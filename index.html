@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin | Genuine Edu-Solutions</title>
+<link rel="icon" href="assets/icon.jpg">
+<link rel="stylesheet" href="admin.css">
+<script type="module" src="admin.js"></script>
+</head>
+<body>
+<div id="auth" class="auth">
+  <form id="authForm" class="card" autocomplete="on">
+    <h1 id="aTitle">Admin sign in</h1><p id="aSub" class="muted"></p>
+    <label id="aNameWrap" hidden>Your name<input id="aName" autocomplete="name"></label>
+    <label>Email<input id="aEmail" type="email" autocomplete="email" required></label>
+    <label>Password<input id="aPass" type="password" minlength="6" autocomplete="current-password" required></label>
+    <button id="aBtn" class="btn" type="submit">Sign in</button>
+    <a id="aForgot" href="#" class="link">Forgot password?</a><a id="aSwitch" href="#" class="link"></a>
+    <p id="aErr" class="err" role="alert"></p>
+  </form>
+</div>
+<div id="app" class="shell" hidden>
+  <aside class="side">
+    <div class="brand"><img src="assets/icon.jpg" alt="" onerror="this.remove()"><strong>Genuine<br><span>Edu-Solutions admin</span></strong></div>
+    <nav class="tabs" aria-label="Sections">
+      <button data-tab="overview" class="on"><i>▦</i>Overview</button>
+      <button data-tab="enq"><i>✉</i>Enquiries</button>
+      <button data-tab="vis"><i>◔</i>Visitors</button>
+      <button data-tab="adm"><i>☺</i>Admins</button>
+      <button data-tab="courses"><i>▣</i>Courses</button>
+      <button data-tab="gallery"><i>▤</i>Gallery</button>
+      <button data-tab="reviews"><i>★</i>Reviews</button>
+    </nav>
+    <div class="me"><span id="who" class="muted"></span><button id="out" class="ghost">Sign out</button></div>
+  </aside>
+  <main>
+    <section id="t-overview">
+      <div id="stats" class="stats"></div>
+      <div class="grid">
+        <div class="card"><h3>Enquiries by course</h3><div id="bCourse"></div></div>
+        <div class="card"><h3>Enquiries by preferred state</h3><div id="bState"></div></div>
+        <div class="card"><h3>Sections people viewed</h3><div id="bSec"></div></div>
+        <div class="card"><h3>Devices</h3><div id="bDev"></div></div>
+        <div class="card"><h3>Where visitors come from</h3><div id="bSrc"></div></div>
+        <div class="card"><h3>How enquirers heard about us</h3><div id="bHow"></div></div>
+        <div class="card"><h3>Enquirers' current location</h3><div id="bLoc"></div></div>
+      </div>
+    </section>
+    <section id="t-enq" hidden>
+      <div class="tools"><input id="q" placeholder="Search name, phone, course, state, location…">
+        <select id="fs"><option value="">All statuses</option><option>New</option><option>Contacted</option><option>Follow-up</option><option>Admitted</option><option>Closed</option></select>
+        <select id="fc"></select><span id="enqCount" class="muted"></span></div>
+      <div class="wrap"><table><thead><tr><th>Received</th><th>Student</th><th>Course</th><th>State</th><th>Current location</th><th>Heard about us</th><th>Message / notes</th><th>Status</th><th></th></tr></thead><tbody id="enqBody"></tbody></table></div>
+    </section>
+    <section id="t-vis" hidden>
+      <p class="muted">Latest 500 visits. Scroll shows how far down the page each visitor reached.</p>
+      <div class="wrap"><table><thead><tr><th>Started</th><th>Device</th><th>Source</th><th>Scroll depth</th><th>Time on page</th><th>Sections</th><th>Clicks</th><th>Enquired</th></tr></thead><tbody id="visBody"></tbody></table></div>
+    </section>
+    <section id="t-adm" hidden>
+      <div class="grid">
+        <div class="card"><h3>Add an admin</h3><form id="admForm">
+          <label>Name<input id="nName" required></label><label>Email<input id="nEmail" type="email" required></label>
+          <label>Temporary password<input id="nPass" type="text" minlength="6" required></label>
+          <button class="btn" type="submit">Add admin</button>
+          <p class="muted">Share the email and temporary password with them. They can change it using “Forgot password” on the sign-in page.</p>
+        </form></div>
+        <div class="card"><h3>Current admins</h3><div id="admList"></div></div>
+      </div>
+    </section>
+    <section id="t-courses" hidden>
+      <div class="courses-heading">
+        <div><h2>Course management</h2><p class="muted">Add and manage the courses displayed on the public website.</p></div>
+        <span id="courseTotal" class="muted">0 total · 0 active</span>
+      </div>
+      <div class="grid course-admin-grid">
+        <div class="card">
+          <h3 id="courseFormTitle">Add a course</h3>
+          <form id="courseForm">
+            <label>Course name<input id="courseTitle" maxlength="100" placeholder="e.g. BSc Nursing" required></label>
+            <label>Category<select id="courseCategory" required>
+              <option value="health">Healthcare</option><option value="biz">Business</option><option value="tech">Technology</option><option value="more">More options</option>
+            </select></label>
+            <label>Description<textarea id="courseDescription" rows="3" maxlength="300" placeholder="Short course description"></textarea></label>
+            <label>Course image<input id="courseImage" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <p id="courseImageHelp" class="muted">Optional · JPG, PNG or WebP · Max 5 MB</p>
+            <div id="coursePreview" class="course-preview"><span class="course-preview-placeholder">Image preview</span></div>
+            <input id="courseImagePath" type="hidden">
+            <button id="courseRemoveImage" class="ghost course-remove-image" type="button">Remove image / use fallback</button>
+            <label>Display order<input id="courseOrder" type="number" min="0" step="1" value="0"></label>
+            <label class="course-check"><input id="courseActive" type="checkbox" checked> Show this course on the website</label>
+            <button id="courseSaveBtn" class="btn" type="submit">Add course</button>
+            <button id="courseCancelBtn" class="ghost course-cancel" type="button" hidden>Cancel editing</button>
+          </form>
+        </div>
+        <div class="card course-list-card">
+          <div class="course-list-title"><h3>Existing courses</h3><span class="muted">Sorted by display order</span></div>
+          <div class="wrap"><table class="course-table"><thead><tr><th>Image</th><th>Course</th><th>Category</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead><tbody id="courseRows"><tr><td colspan="6" class="muted">Loading courses…</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+    <section id="t-gallery" hidden>
+      <div class="courses-heading">
+        <div><h2>Gallery</h2><p class="muted">Photos shown in the website gallery.</p></div>
+        <span id="galTotal" class="muted">0 photos</span>
+      </div>
+      <div class="grid course-admin-grid">
+        <div class="card">
+          <h3>Add photos</h3>
+          <form id="galForm">
+            <label>Photos (you can pick several)<input id="galFiles" type="file" accept="image/png,image/jpeg,image/webp" multiple required></label>
+            <label>Caption (optional)<input id="galCaption" maxlength="80" placeholder="e.g. Student counselling"></label>
+            <label>Starting display order<input id="galOrder" type="number" min="0" step="1" value="0"></label>
+            <button id="galBtn" class="btn" type="submit">Upload</button>
+            <p class="muted">JPG, PNG or WebP · Max 10 MB each</p>
+          </form>
+        </div>
+        <div class="card"><h3>Current photos</h3><div id="galList" class="gal-grid"></div></div>
+      </div>
+    </section>
+
+<section id="t-reviews" hidden>
+  <div class="courses-heading">
+    <div><h2>Reviews</h2><p class="muted">Student feedback shown on the website. Only add real, approved reviews.</p></div>
+    <span id="revTotal" class="muted">0 reviews</span>
+  </div>
+  <div class="grid course-admin-grid">
+    <div class="card">
+      <h3 id="revFormTitle">Add a review</h3>
+      <form id="revForm">
+        <label>Student name<input id="revName" maxlength="60" placeholder="e.g. Anagha Nair" required></label>
+        <label>Place (optional)<input id="revLocation" maxlength="80" placeholder="e.g. Kollam, Kerala"></label>
+        <label>Rating<select id="revRating" required>
+          <option value="5">5 - Excellent</option><option value="4">4 - Very good</option>
+          <option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Poor</option>
+        </select></label>
+        <label>Review<textarea id="revText" rows="4" maxlength="400" placeholder="What the student said" required></textarea></label>
+        <label>Display order<input id="revOrder" type="number" min="0" step="1" value="0"></label>
+        <label class="course-check"><input id="revActive" type="checkbox" checked> Show this review on the website</label>
+        <button id="revSaveBtn" class="btn" type="submit">Add review</button>
+        <button id="revCancelBtn" class="ghost course-cancel" type="button" hidden>Cancel editing</button>
+      </form>
+    </div>
+    <div class="card course-list-card">
+      <div class="course-list-title"><h3>Existing reviews</h3><span class="muted">Sorted by display order</span></div>
+      <div class="wrap"><table class="course-table"><thead><tr><th>Student</th><th>Review</th><th>Rating</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="revRows"><tr><td colspan="6" class="muted">Loading reviews…</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+  </main>
+</div>
+<div id="toast" role="status"></div>
+</body></html>
