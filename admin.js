@@ -460,3 +460,76 @@ document.addEventListener("click", async e => {
     }
   } catch (x) { toast(msg(x)); }
 });
+
+
+/* Loading states for buttons. Works alongside admin.js without changing it.
+   - Sign in / sign up / forgot-password button shows a spinner until the
+     attempt finishes (error shown, panel hidden, or 20s timeout).
+   - Other form buttons (courses, gallery, reviews, admins) get the same state. */
+(function () {
+  const TIMEOUT = 20000;
+
+  function startLoading(btn, label) {
+    if (!btn || btn.classList.contains('loading')) return;
+    btn.dataset.label = btn.textContent;
+    btn.classList.add('loading');
+    btn.setAttribute('aria-busy', 'true');
+    if (label) btn.textContent = label;
+    btn._timer = setTimeout(() => stopLoading(btn), TIMEOUT);
+  }
+
+  function stopLoading(btn) {
+    if (!btn || !btn.classList.contains('loading')) return;
+    clearTimeout(btn._timer);
+    btn.classList.remove('loading');
+    btn.removeAttribute('aria-busy');
+    // Restore the label only if admin.js has not already changed it.
+    if (btn.dataset.label !== undefined && /\u2026$/.test(btn.textContent)) {
+      btn.textContent = btn.dataset.label;
+    }
+    delete btn.dataset.label;
+  }
+
+  // ---- Auth form ----
+  const authForm = document.getElementById('authForm');
+  const aBtn = document.getElementById('aBtn');
+  const aErr = document.getElementById('aErr');
+  const aNameWrap = document.getElementById('aNameWrap');
+  const auth = document.getElementById('auth');
+
+  if (authForm && aBtn) {
+    authForm.addEventListener('submit', () => {
+      if (!authForm.checkValidity()) return;
+      const signingUp = aNameWrap && !aNameWrap.hidden;
+      const t = aBtn.textContent.toLowerCase();
+      const label = signingUp || /creat|sign ?up|register/.test(t)
+        ? 'Creating account\u2026'
+        : /reset|send/.test(t) ? 'Sending\u2026' : 'Signing in\u2026';
+      startLoading(aBtn, label);
+    });
+    if (aErr) new MutationObserver(() => { if (aErr.textContent.trim()) stopLoading(aBtn); })
+      .observe(aErr, { childList: true, characterData: true, subtree: true });
+    if (auth) new MutationObserver(() => { if (auth.hidden) stopLoading(aBtn); })
+      .observe(auth, { attributes: true, attributeFilter: ['hidden'] });
+  }
+
+  // ---- Other forms ----
+  ['admForm', 'courseForm', 'galForm', 'revForm'].forEach((id) => {
+    const form = document.getElementById(id);
+    const btn = form && form.querySelector('button[type=submit]');
+    if (!form || !btn) return;
+    form.addEventListener('submit', () => {
+      if (!form.checkValidity()) return;
+      startLoading(btn, /upload/i.test(btn.textContent) ? 'Uploading\u2026' : 'Saving\u2026');
+    });
+    // admin.js re-enables / relabels the button when done.
+    new MutationObserver(() => {
+      if (!btn.disabled && btn.classList.contains('loading') &&
+          !/\u2026$/.test(btn.textContent)) stopLoading(btn);
+    }).observe(btn, { attributes: true, childList: true, characterData: true, subtree: true });
+    const toast = document.getElementById('toast');
+    if (toast) new MutationObserver(() => {
+      if (toast.classList.contains('show')) stopLoading(btn);
+    }).observe(toast, { attributes: true, attributeFilter: ['class'] });
+  });
+})();

@@ -4,14 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#17b897">
 <title>Admin | Genuine Edu-Solutions</title>
 <link rel="icon" href="assets/icon.jpg">
 <link rel="stylesheet" href="admin.css">
 <script type="module" src="admin.js"></script>
+<script src="admin-ui.js" defer></script>
 </head>
 <body>
+
+<!-- Shared illustration sprite (colors match the logo: teal, amber, grey) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ill-hero" viewBox="0 0 400 300">
+      <g fill="none" stroke-linecap="round">
+        <path d="M50 252a150 150 0 0 1 300 0" stroke="#c9ccce" stroke-width="9"/>
+        <path d="M72 252a128 128 0 0 1 256 0" stroke="#dcdfe0" stroke-width="7"/>
+        <path d="M94 252a106 106 0 0 1 212 0" stroke="#e8eaeb" stroke-width="6"/>
+      </g>
+      <path d="M200 262 78 240v-34l122 20z" fill="#7fd9c5"/>
+      <path d="M200 262l122-22v-34l-122 20z" fill="#7fd9c5"/>
+      <path d="M200 252 88 232v-34l112 19z" fill="#17b897"/>
+      <path d="M200 252l112-20v-34l-112 19z" fill="#129a7e"/>
+      <path d="M200 252V217" stroke="#fff" stroke-width="3"/>
+      <!-- side figures -->
+      <path d="M132 160c18 6 40 20 66 50-30-6-52-8-82-4 10-14 12-30 16-46z" fill="#17b897"/>
+      <path d="M268 160c-18 6-40 20-66 50 30-6 52-8 82-4-10-14-12-30-16-46z" fill="#17b897"/>
+      <circle cx="132" cy="146" r="9" fill="#17b897"/><circle cx="268" cy="146" r="9" fill="#17b897"/>
+      <path d="M121 138l11-6 11 6-11 6z" fill="#129a7e"/><path d="M257 138l11-6 11 6-11 6z" fill="#129a7e"/>
+      <!-- centre figure -->
+      <path d="M166 120l34 96 34-96-22 22-12-14-12 14z" fill="#f2a516"/>
+      <circle cx="200" cy="124" r="12" fill="#f2a516" stroke="#fff" stroke-width="3"/>
+      <path d="M186 106l14-8 14 8-14 8z" fill="#f2a516"/>
+      <!-- sparkles -->
+      <g fill="#f2a516"><circle cx="60" cy="90" r="4"/><circle cx="352" cy="110" r="5"/><circle cx="318" cy="52" r="3"/></g>
+      <g fill="#17b897"><circle cx="86" cy="52" r="3"/><circle cx="344" cy="176" r="3"/></g>
+    </symbol>
+
+    <symbol id="ill-mini" viewBox="0 0 120 90">
+      <g fill="none" stroke-linecap="round"><path d="M14 78a46 46 0 0 1 92 0" stroke="#d3d6d8" stroke-width="5"/><path d="M26 78a34 34 0 0 1 68 0" stroke="#e4e6e7" stroke-width="4"/></g>
+      <path d="M60 80 22 73V62l38 7z" fill="#17b897"/><path d="M60 80l38-7V62l-38 7z" fill="#129a7e"/>
+      <path d="M46 40l14 36 14-36-8 8-6-6-6 6z" fill="#f2a516"/><circle cx="60" cy="38" r="6" fill="#f2a516"/>
+    </symbol>
+
+    <symbol id="ill-chart" viewBox="0 0 160 110">
+      <rect x="10" y="62" width="22" height="38" rx="5" fill="#bfeee3"/><rect x="42" y="42" width="22" height="58" rx="5" fill="#17b897"/>
+      <rect x="74" y="26" width="22" height="74" rx="5" fill="#f2a516"/><rect x="106" y="50" width="22" height="50" rx="5" fill="#129a7e"/>
+      <path d="M8 104h130" stroke="#c9ccce" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="140" cy="22" r="8" fill="#f2a516" opacity=".5"/>
+    </symbol>
+
+    <symbol id="ill-inbox" viewBox="0 0 160 110">
+      <rect x="22" y="30" width="116" height="66" rx="10" fill="#e0f6f1" stroke="#17b897" stroke-width="3"/>
+      <path d="M26 36l54 38 54-38" fill="none" stroke="#17b897" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="132" cy="30" r="14" fill="#f2a516"/><path d="M126 30l5 5 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="ill-people" viewBox="0 0 160 110">
+      <circle cx="80" cy="36" r="15" fill="#f2a516"/><path d="M48 96c0-22 14-34 32-34s32 12 32 34z" fill="#f2a516"/>
+      <circle cx="38" cy="46" r="11" fill="#17b897"/><path d="M14 96c0-17 10-27 24-27s24 10 24 27z" fill="#17b897"/>
+      <circle cx="122" cy="46" r="11" fill="#129a7e"/><path d="M98 96c0-17 10-27 24-27s24 10 24 27z" fill="#129a7e"/>
+    </symbol>
+
+    <symbol id="ill-photo" viewBox="0 0 160 110">
+      <rect x="18" y="20" width="124" height="80" rx="10" fill="#e0f6f1" stroke="#17b897" stroke-width="3"/>
+      <circle cx="54" cy="46" r="10" fill="#f2a516"/>
+      <path d="M22 92l40-34 26 22 20-16 30 28z" fill="#17b897"/>
+    </symbol>
+
+    <symbol id="ill-star" viewBox="0 0 160 110">
+      <path d="M80 12l16 33 36 5-26 25 6 36-32-17-32 17 6-36-26-25 36-5z" fill="#f2a516"/>
+      <circle cx="132" cy="24" r="6" fill="#17b897"/><circle cx="26" cy="84" r="5" fill="#17b897" opacity=".6"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div id="auth" class="auth">
+  <div class="auth-hero" aria-hidden="true">
+    <img class="auth-logo" src="assets/icon.jpg" alt="" onerror="this.remove()">
+    <svg class="auth-art"><use href="#ill-hero"/></svg>
+    <h2>Guiding students to the right course</h2>
+    <p>Manage enquiries, courses, gallery and reviews in one place.</p>
+  </div>
   <form id="authForm" class="card" autocomplete="on">
+    <svg class="form-art" aria-hidden="true"><use href="#ill-mini"/></svg>
     <h1 id="aTitle">Admin sign in</h1><p id="aSub" class="muted"></p>
     <label id="aNameWrap" hidden>Your name<input id="aName" autocomplete="name"></label>
     <label>Email<input id="aEmail" type="email" autocomplete="email" required></label>
@@ -21,6 +97,7 @@
     <p id="aErr" class="err" role="alert"></p>
   </form>
 </div>
+
 <div id="app" class="shell" hidden>
   <aside class="side">
     <div class="brand"><img src="assets/icon.jpg" alt="" onerror="this.remove()"><strong>Genuine<br><span>Edu-Solutions admin</span></strong></div>
@@ -37,6 +114,10 @@
   </aside>
   <main>
     <section id="t-overview">
+      <div class="page-head welcome">
+        <div><h2>Welcome back 👋</h2><p class="muted">Here is how your website and enquiries are doing.</p></div>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-chart"/></svg>
+      </div>
       <div id="stats" class="stats"></div>
       <div class="grid">
         <div class="card"><h3>Enquiries by course</h3><div id="bCourse"></div></div>
@@ -49,16 +130,27 @@
       </div>
     </section>
     <section id="t-enq" hidden>
+      <div class="page-head">
+        <div><h2>Enquiries</h2><p class="muted">Students who contacted you through the website.</p></div>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-inbox"/></svg>
+      </div>
       <div class="tools"><input id="q" placeholder="Search name, phone, course, state, location…">
         <select id="fs"><option value="">All statuses</option><option>New</option><option>Contacted</option><option>Follow-up</option><option>Admitted</option><option>Closed</option></select>
         <select id="fc"></select><span id="enqCount" class="muted"></span></div>
       <div class="wrap"><table><thead><tr><th>Received</th><th>Student</th><th>Course</th><th>State</th><th>Current location</th><th>Heard about us</th><th>Message / notes</th><th>Status</th><th></th></tr></thead><tbody id="enqBody"></tbody></table></div>
     </section>
     <section id="t-vis" hidden>
-      <p class="muted">Latest 500 visits. Scroll shows how far down the page each visitor reached.</p>
+      <div class="page-head">
+        <div><h2>Visitors</h2><p class="muted">Latest 500 visits. Scroll shows how far down the page each visitor reached.</p></div>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-chart"/></svg>
+      </div>
       <div class="wrap"><table><thead><tr><th>Started</th><th>Device</th><th>Source</th><th>Scroll depth</th><th>Time on page</th><th>Sections</th><th>Clicks</th><th>Enquired</th></tr></thead><tbody id="visBody"></tbody></table></div>
     </section>
     <section id="t-adm" hidden>
+      <div class="page-head">
+        <div><h2>Admins</h2><p class="muted">People who can sign in to this dashboard.</p></div>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-people"/></svg>
+      </div>
       <div class="grid">
         <div class="card"><h3>Add an admin</h3><form id="admForm">
           <label>Name<input id="nName" required></label><label>Email<input id="nEmail" type="email" required></label>
@@ -70,9 +162,10 @@
       </div>
     </section>
     <section id="t-courses" hidden>
-      <div class="courses-heading">
+      <div class="courses-heading page-head">
         <div><h2>Course management</h2><p class="muted">Add and manage the courses displayed on the public website.</p></div>
         <span id="courseTotal" class="muted">0 total · 0 active</span>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-mini"/></svg>
       </div>
       <div class="grid course-admin-grid">
         <div class="card">
@@ -101,9 +194,10 @@
       </div>
     </section>
     <section id="t-gallery" hidden>
-      <div class="courses-heading">
+      <div class="courses-heading page-head">
         <div><h2>Gallery</h2><p class="muted">Photos shown in the website gallery.</p></div>
         <span id="galTotal" class="muted">0 photos</span>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-photo"/></svg>
       </div>
       <div class="grid course-admin-grid">
         <div class="card">
@@ -120,36 +214,36 @@
       </div>
     </section>
 
-<section id="t-reviews" hidden>
-  <div class="courses-heading">
-    <div><h2>Reviews</h2><p class="muted">Student feedback shown on the website. Only add real, approved reviews.</p></div>
-    <span id="revTotal" class="muted">0 reviews</span>
-  </div>
-  <div class="grid course-admin-grid">
-    <div class="card">
-      <h3 id="revFormTitle">Add a review</h3>
-      <form id="revForm">
-        <label>Student name<input id="revName" maxlength="60" placeholder="e.g. Anagha Nair" required></label>
-        <label>Place (optional)<input id="revLocation" maxlength="80" placeholder="e.g. Kollam, Kerala"></label>
-        <label>Rating<select id="revRating" required>
-          <option value="5">5 - Excellent</option><option value="4">4 - Very good</option>
-          <option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Poor</option>
-        </select></label>
-        <label>Review<textarea id="revText" rows="4" maxlength="400" placeholder="What the student said" required></textarea></label>
-        <label>Display order<input id="revOrder" type="number" min="0" step="1" value="0"></label>
-        <label class="course-check"><input id="revActive" type="checkbox" checked> Show this review on the website</label>
-        <button id="revSaveBtn" class="btn" type="submit">Add review</button>
-        <button id="revCancelBtn" class="ghost course-cancel" type="button" hidden>Cancel editing</button>
-      </form>
-    </div>
-    <div class="card course-list-card">
-      <div class="course-list-title"><h3>Existing reviews</h3><span class="muted">Sorted by display order</span></div>
-      <div class="wrap"><table class="course-table"><thead><tr><th>Student</th><th>Review</th><th>Rating</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
-      <tbody id="revRows"><tr><td colspan="6" class="muted">Loading reviews…</td></tr></tbody></table></div>
-    </div>
-  </div>
-</section>
-
+    <section id="t-reviews" hidden>
+      <div class="courses-heading page-head">
+        <div><h2>Reviews</h2><p class="muted">Student feedback shown on the website. Only add real, approved reviews.</p></div>
+        <span id="revTotal" class="muted">0 reviews</span>
+        <svg class="head-art" aria-hidden="true"><use href="#ill-star"/></svg>
+      </div>
+      <div class="grid course-admin-grid">
+        <div class="card">
+          <h3 id="revFormTitle">Add a review</h3>
+          <form id="revForm">
+            <label>Student name<input id="revName" maxlength="60" placeholder="e.g. Anagha Nair" required></label>
+            <label>Place (optional)<input id="revLocation" maxlength="80" placeholder="e.g. Kollam, Kerala"></label>
+            <label>Rating<select id="revRating" required>
+              <option value="5">5 - Excellent</option><option value="4">4 - Very good</option>
+              <option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Poor</option>
+            </select></label>
+            <label>Review<textarea id="revText" rows="4" maxlength="400" placeholder="What the student said" required></textarea></label>
+            <label>Display order<input id="revOrder" type="number" min="0" step="1" value="0"></label>
+            <label class="course-check"><input id="revActive" type="checkbox" checked> Show this review on the website</label>
+            <button id="revSaveBtn" class="btn" type="submit">Add review</button>
+            <button id="revCancelBtn" class="ghost course-cancel" type="button" hidden>Cancel editing</button>
+          </form>
+        </div>
+        <div class="card course-list-card">
+          <div class="course-list-title"><h3>Existing reviews</h3><span class="muted">Sorted by display order</span></div>
+          <div class="wrap"><table class="course-table"><thead><tr><th>Student</th><th>Review</th><th>Rating</th><th>Order</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="revRows"><tr><td colspan="6" class="muted">Loading reviews…</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 <div id="toast" role="status"></div>
