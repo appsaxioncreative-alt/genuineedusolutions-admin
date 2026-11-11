@@ -61,7 +61,6 @@ function showAuth(m, err) {
   $("#aBtn").textContent = s ? "Create owner account" : "Sign in";
   $("#aPass").autocomplete = s ? "new-password" : "current-password";
   $("#aErr").textContent = err || note; note = "";
-  $("#aSwitch").textContent = s ? "Already have an account? Sign in" : "First time here? Create the owner account";
 }
 $("#aSwitch").addEventListener("click", e => { e.preventDefault(); showAuth(mode === "setup" ? "login" : "setup"); });
 
